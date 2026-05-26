@@ -1,0 +1,4 @@
+allowBuilds:
+  bcrypt: true
+minimumReleaseAgeExclude:
+  - pnpm@11.3.0
