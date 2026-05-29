@@ -1,14 +1,19 @@
 import express from 'express';
-// 1. PRIMEIRO conectamos ao banco e inicializamos os models
 import './database/index.js';
 
-// 2. DEPOIS importamos as rotas (que usam os models já inicializados)
 import routes from './routes.js';
+import filesRoutesConfig from './config/filleRoutes.cjs';
 
 const app = express();
 
+// 1. Middlewares globais e configuradores (Devem vir primeiro)
 app.use(express.json());
-app.use(routes);
 app.use(express.urlencoded({ extended: true }));
+
+// 2. Rota para servir os arquivos de imagem (Antes das rotas principais)
+app.use('/product-files', filesRoutesConfig);
+
+// 3. Suas rotas da API
+app.use(routes);
 
 export default app;
